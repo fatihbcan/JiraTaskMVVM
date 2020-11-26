@@ -6,12 +6,21 @@
     <string name="CKSM">CKSM</string>
     <string name="Egitim">Egitim</string>
     <string name="sanat">Sanat</string>
+    <string name="ucretsiz">Ücretsiz</string>
+    <string name="ucretli">Ücretli</string>
     <string name="event_finder">Event Finder</string>
     <string name="price">price</string>
     <string name="detailformat">detailformat</string>
-    <string name="startDate">25-12-2020</string>
-    <string name="endDate">26-12-2020</string>
+    <string name="startDate">25–12–2020</string>
+    <string name="endDate">26–12–2020</string>
     <string name="ticketurl">ticketUrl</string>
-    <string name="adress">adress</string>
+    <string name="adress">address</string>
     <string name="header">Etkinlik</string>
+    <string name="bilet_link">"Bilet Linki : "</string>
+    <string name="event_category">"Kategori : "</string>
+    <string name="event_format">"Format : "</string>
+    <string name="event_start_date">"Başlangıç Tarihi : "</string>
+    <string name="event_end_date">"Bitiş Tarihi : "</string>
+    <string name="event_address">"Adres : "</string>
+    <string name="event_online">Online Etkinlik</string>
 </resources>
