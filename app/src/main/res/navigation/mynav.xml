@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mynav"
+    app:startDestination="@id/citySelectionPage">
+
+    <fragment
+        android:id="@+id/eventListPage"
+        android:name="com.example.jirataskmvvm.view.eventListPage.EventListPage"
+        android:label="fragment_event_list_page"
+        tools:layout="@layout/fragment_event_list_page" >
+        <action
+            android:id="@+id/goToEventDetailPage"
+            app:destination="@id/eventDetailPage" />
+    </fragment>
+    <fragment
+        android:id="@+id/citySelectionPage"
+        android:name="com.example.jirataskmvvm.view.citySelectPage.citySelectionPage"
+        android:label="fragment_city_selection_page"
+        tools:layout="@layout/fragment_city_selection_page" >
+        <action
+            android:id="@+id/goToEventListPage"
+            app:destination="@id/eventListPage" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventDetailPage"
+        android:name="com.example.jirataskmvvm.view.eventDetailPage.EventDetailPage"
+        android:label="fragment_event_detail_page"
+        tools:layout="@layout/fragment_event_detail_page" >
+        <argument
+            android:name="eventDetails"
+            app:argType="com.example.jirataskmvvm.model.apiClasses.Items" />
+    </fragment>
+</navigation>

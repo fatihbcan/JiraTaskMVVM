@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">JiraTaskMVVM</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="a_city">a_city</string>
+    <string name="CKSM">CKSM</string>
+    <string name="Egitim">Egitim</string>
+    <string name="sanat">Sanat</string>
+    <string name="event_finder">Event Finder</string>
+    <string name="price">price</string>
+    <string name="detailformat">detailformat</string>
+    <string name="startDate">25-12-2020</string>
+    <string name="endDate">26-12-2020</string>
+    <string name="ticketurl">ticketUrl</string>
+    <string name="adress">adress</string>
+    <string name="header">Etkinlik</string>
+</resources>
