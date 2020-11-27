@@ -9,11 +9,11 @@ object cityService {
 
     private val client = OkHttpClient.Builder().build()
 
-    private val retrofit = Retrofit.Builder()
-            .baseUrl("https://backend.etkinlik.io/api/v2/")
-            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
-            .client(client)
-            .build()
+    val retrofit by lazy { Retrofit.Builder()
+        .baseUrl("https://backend.etkinlik.io/api/v2/")
+        .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
+        .client(client)
+        .build() }
 
     fun<T> buildService(service: Class<T>): T{
         return retrofit.create(service)

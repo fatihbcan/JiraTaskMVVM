@@ -1,7 +1,6 @@
 package com.example.jirataskmvvm.domain.cityPageDomain
 
 import com.example.jirataskmvvm.model.apiClasses.City
-import com.example.jirataskmvvm.model.apiClasses.Json4Kotlin_Base
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers
