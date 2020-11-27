@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.jirataskmvvm.R
 import com.example.jirataskmvvm.viewModel.CityRmViewModel
+import kotlinx.android.synthetic.main.fragment_city_selection_page.view.*
 
 
 class citySelectionPage : Fragment() {
@@ -26,10 +26,8 @@ class citySelectionPage : Fragment() {
         val view = inflater.inflate(R.layout.fragment_city_selection_page, container, false)
 
         cityViewModel = ViewModelProvider(this).get(CityRmViewModel::class.java)
-        cityViewModel.load()
 
-
-        val recyclerView = view.findViewById<RecyclerView>(R.id.cityPageRecycler)
+        val recyclerView = view.cityPageRecycler
         recyclerView.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = cityAdapter

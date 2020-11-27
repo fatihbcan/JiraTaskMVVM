@@ -11,9 +11,9 @@ class EventListViewModel : ViewModel() {
     private val eventListRepo = EventListRepository()
 
     val liveEvents = liveData(Dispatchers.IO) {
-        val retrived = eventListRepo.getEvents().items
+        val retrieved = eventListRepo.getEvents().items
 
-        emit(retrived)
+        emit(retrieved)
     }
 
     /*fun loadData(){

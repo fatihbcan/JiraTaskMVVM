@@ -1,49 +1,57 @@
 package com.example.jirataskmvvm.viewModel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.jirataskmvvm.Room.CityRm
 import com.example.jirataskmvvm.Room.CityRoomRepository
 import com.example.jirataskmvvm.Room.EventsDatabase
 import com.example.jirataskmvvm.domain.cityPageDomain.CityRepository
-import com.example.jirataskmvvm.model.apiClasses.City
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
 class CityRmViewModel (application: Application):AndroidViewModel(application) {
 
-    val allCities: LiveData<List<CityRm>>
-
-    private val cityRoomRepository: CityRoomRepository
-    private val cityRepository: CityRepository
+    val allCities = MutableLiveData<List<CityRm>>()
+    val cityDao = EventsDatabase.getEventsDatabase(application).cityDao()
+    private val cityRoomRepository: CityRoomRepository = CityRoomRepository(cityDao)
+    private val cityRepository: CityRepository = CityRepository()
 
     init {
-        val cityDao = EventsDatabase.getEventsDatabase(application).cityDao()
-        cityRoomRepository = CityRoomRepository(cityDao)
-        allCities = cityRoomRepository.readAllData
-        cityRepository = CityRepository()
-
+        viewModelScope.launch(Main) {
+            val cities = cityRoomRepository.readAllCities()
+            allCities.value = cities
+        }
+        viewModelScope.launch(IO) {
+            callCityApi()
+        }
     }
-
 
     private suspend fun addCity(cityRm: CityRm) {
         cityRoomRepository.addCity(cityRm)
 
     }
 
-    fun load() {
-        callCityApi()
-    }
 
-    private fun callCityApi() {
-        viewModelScope.launch(Dispatchers.IO) {
-            val cities: List<City> = cityRepository.getCities()
-            for (i in 0..cities.size) {
-                val cityRm = CityRm(cities[i].id, cities[i].name)
-                addCity(cityRm)
+    private suspend fun callCityApi() {
+        Log.d("cityRmViewModel callCityApi", "CoroutineScope is working")
+        val response = cityRepository.getCities()
+        try {
+            if (response.isSuccessful) {
+                val length = response.body()!!.size - 1
+                for (i in 0..length) {
+                    val cityRm = CityRm(response.body()!![i].id, response.body()!![i].name)
+                    addCity(cityRm)
+                }
+            } else {
+                Log.e("Response error !! code ", response.code().toString())
             }
+        } catch (e: HttpException) {
+            Log.e("Http error City Api ", e.toString())
         }
     }
 
