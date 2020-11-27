@@ -17,6 +17,7 @@ class EventListPage : Fragment() {
     lateinit var eventListViewModel: EventListViewModel
     private val eventListAdapter = EventListPgAdapter(arrayListOf())
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -25,7 +26,7 @@ class EventListPage : Fragment() {
 
 
         eventListViewModel = ViewModelProvider(this).get(EventListViewModel::class.java)
-        eventListViewModel.loadData()
+
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.eventListRecycler)
         recyclerView.apply {
@@ -40,11 +41,14 @@ class EventListPage : Fragment() {
         return view
     }
 
-    fun observeViewModel(){
-        eventListViewModel.liveEvents.observe(viewLifecycleOwner, { events -> events?.let {
-            eventListAdapter.updateEvents(it)
-        }
+    fun observeViewModel() {
+        eventListViewModel.liveEvents.observe(viewLifecycleOwner, { events ->
+            events?.let {
+                eventListAdapter.updateEvents(it)
+            }
         })
     }
+
+
 
 }

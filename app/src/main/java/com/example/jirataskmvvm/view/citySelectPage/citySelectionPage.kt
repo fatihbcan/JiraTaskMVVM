@@ -9,12 +9,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.jirataskmvvm.R
-import com.example.jirataskmvvm.viewModel.citySelectViewModel
+import com.example.jirataskmvvm.viewModel.CityRmViewModel
 
 
 class citySelectionPage : Fragment() {
 
-    lateinit var cityViewModel: citySelectViewModel
+    lateinit var cityViewModel: CityRmViewModel
     private val cityAdapter = cityScPageAdapter(arrayListOf())
 
 
@@ -25,8 +25,9 @@ class citySelectionPage : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_city_selection_page, container, false)
 
-        cityViewModel = ViewModelProvider(this).get(citySelectViewModel::class.java)
-        cityViewModel.loadData()
+        cityViewModel = ViewModelProvider(this).get(CityRmViewModel::class.java)
+        cityViewModel.load()
+
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.cityPageRecycler)
         recyclerView.apply {
@@ -39,9 +40,10 @@ class citySelectionPage : Fragment() {
     }
 
     fun observeViewModel(){
-        cityViewModel.liveCities.observe(viewLifecycleOwner, { cities -> cities?.let {
+        cityViewModel.allCities.observe(viewLifecycleOwner, { cities ->
+            cities?.let {
                 cityAdapter.updateCities(it)
-        }
+            }
         })
     }
 

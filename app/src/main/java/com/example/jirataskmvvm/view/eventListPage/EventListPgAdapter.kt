@@ -8,11 +8,8 @@ import android.widget.TextView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.jirataskmvvm.R
-import com.example.jirataskmvvm.model.apiClasses.City
 import com.example.jirataskmvvm.model.apiClasses.Items
-import com.example.jirataskmvvm.utils.SingletonCityID
 import com.example.jirataskmvvm.utils.SingletonEventID
-import com.example.jirataskmvvm.view.citySelectPage.citySelectionPageDirections
 import com.example.jirataskmvvm.view.eventListPage.EventListPageDirections.Companion.goToEventDetailPage
 
 class EventListPgAdapter (var events: ArrayList<Items>): RecyclerView.Adapter<EventListPgAdapter.eventListPgViewHolder>(){

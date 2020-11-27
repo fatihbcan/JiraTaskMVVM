@@ -1,24 +1,25 @@
 package com.example.jirataskmvvm.viewModel
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
 import com.example.jirataskmvvm.domain.eventListDomain.EventListRepository
-import com.example.jirataskmvvm.model.apiClasses.Items
-import com.example.jirataskmvvm.utils.SingletonCityID
+import kotlinx.coroutines.Dispatchers
 
-class EventListViewModel : ViewModel(){
+class EventListViewModel : ViewModel() {
 
-    var defaultCityID = SingletonCityID.myCityID()
-    val liveEvents = MutableLiveData<List<Items>>()
+    //val liveEvents = MutableLiveData<List<Items>>()
     private val eventListRepo = EventListRepository()
 
-    private fun callEventListApi(){
-        eventListRepo.callEventListApi(liveEvents,defaultCityID)
+    val liveEvents = liveData(Dispatchers.IO) {
+        val retrived = eventListRepo.getEvents().items
 
+        emit(retrived)
     }
 
-    fun loadData() {
+    /*fun loadData(){
         callEventListApi()
     }
+*/
+
 
 }

@@ -1,9 +1,5 @@
 package com.example.jirataskmvvm.utils
 
-import android.util.Log
-import java.text.SimpleDateFormat
-import java.util.*
-
 /*fun divideStringForDate(myString: String): String{
 
 }*/

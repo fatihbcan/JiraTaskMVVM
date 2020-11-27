@@ -8,23 +8,23 @@ import android.widget.TextView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.jirataskmvvm.R
-import com.example.jirataskmvvm.model.apiClasses.City
+import com.example.jirataskmvvm.Room.CityRm
 import com.example.jirataskmvvm.utils.SingletonCityID
-import com.example.jirataskmvvm.viewModel.EventListViewModel
 
-class cityScPageAdapter(var myCities: ArrayList<City>): RecyclerView.Adapter<cityScPageAdapter.cityScPageViewHolder>(){
+class cityScPageAdapter(var myCities: ArrayList<CityRm>) :
+    RecyclerView.Adapter<cityScPageAdapter.cityScPageViewHolder>() {
 
 
-    private val  eventListVM = EventListViewModel()
-
-    fun updateCities(newCities: List<City>){
+    fun updateCities(newCities: List<CityRm>) {
         myCities.clear()
         myCities.addAll(newCities)
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): cityScPageViewHolder {
-        return cityScPageViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_cities,parent,false))
+        return cityScPageViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_cities, parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: cityScPageViewHolder, position: Int) {
@@ -45,9 +45,9 @@ class cityScPageAdapter(var myCities: ArrayList<City>): RecyclerView.Adapter<cit
 
         private val cityName = view.findViewById<TextView>(R.id.cityName)
 
-            fun bind(myCity: City){
-                cityName.text = myCity.name
-            }
+        fun bind(myCity: CityRm) {
+            cityName.text = myCity.name
+        }
     }
 
 }

@@ -1,7 +1,7 @@
 package com.example.jirataskmvvm
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -14,13 +14,24 @@ class MainActivity : AppCompatActivity() {
         setupNavigation()
     }
 
-    fun setupNavigation(){
+    override fun onBackPressed() {
+        val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+        (fragment as? IOnBackPressed)?.onBackPressed()?.not()?.let {
+            super.onBackPressed()
+        }
+    }
+
+    fun setupNavigation() {
         val host: NavHostFragment = supportFragmentManager
             .findFragmentById(R.id.fragment_container) as NavHostFragment? ?: return
 
         val navController: NavController = host.navController
-        val myNav : NavigationView = findViewById<NavigationView>(R.id.navigationView)
+        val myNav: NavigationView = findViewById<NavigationView>(R.id.navigationView)
         myNav.setupWithNavController(navController)
     }
 
+}
+
+interface IOnBackPressed {
+    fun onBackPressed(): Boolean
 }

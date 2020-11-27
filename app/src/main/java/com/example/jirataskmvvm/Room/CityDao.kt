@@ -1,6 +1,6 @@
 package com.example.jirataskmvvm.Room
 
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -13,6 +13,6 @@ interface CityDao {
     suspend fun addCity(cityRm: CityRm)
 
     @Query("SELECT * FROM city_table ORDER BY id ASC")
-    fun readAllCities(): MutableLiveData<List<CityRm>>
+    fun readAllCities(): LiveData<List<CityRm>>
 
 }
