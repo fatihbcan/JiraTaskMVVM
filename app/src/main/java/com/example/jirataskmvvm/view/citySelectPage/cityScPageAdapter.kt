@@ -29,7 +29,7 @@ class cityScPageAdapter(var myCities: ArrayList<CityRm>) :
 
     override fun onBindViewHolder(holder: cityScPageViewHolder, position: Int) {
         holder.itemView.setOnClickListener {
-            SingletonCityID.cityID = myCities[position].id
+            SingletonCityID.cityID = myCities[position].cId
             val action = citySelectionPageDirections.goToEventListPage()
             Navigation.findNavController(it).navigate(action)
         }

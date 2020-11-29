@@ -1,6 +1,7 @@
 package com.example.jirataskmvvm.domain.eventListDomain
 
 import com.example.jirataskmvvm.model.apiClasses.Json4Kotlin_Base
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
@@ -15,5 +16,5 @@ interface EventListEndPoint {
     @GET("events")
     suspend fun getEvents(
         @Query("city_ids") city_id: Int
-    ): Json4Kotlin_Base
+    ): Response<Json4Kotlin_Base>
 }

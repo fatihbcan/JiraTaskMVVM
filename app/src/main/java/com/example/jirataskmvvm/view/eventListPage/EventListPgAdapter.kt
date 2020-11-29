@@ -8,14 +8,17 @@ import android.widget.TextView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.jirataskmvvm.R
+import com.example.jirataskmvvm.Room.EventsRm
 import com.example.jirataskmvvm.model.apiClasses.Items
 import com.example.jirataskmvvm.utils.SingletonEventID
 import com.example.jirataskmvvm.view.eventListPage.EventListPageDirections.Companion.goToEventDetailPage
 
-class EventListPgAdapter (var events: ArrayList<Items>): RecyclerView.Adapter<EventListPgAdapter.eventListPgViewHolder>(){
+//import com.example.jirataskmvvm.view.eventListPage.EventListPageDirections.Companion.goToEventDetailPage
+
+class EventListPgAdapter (var events: ArrayList<EventsRm>): RecyclerView.Adapter<EventListPgAdapter.eventListPgViewHolder>(){
 
 
-    fun updateEvents(newEvents: List<Items>){
+    fun updateEvents(newEvents: List<EventsRm>){
         events.clear()
         events.addAll(newEvents)
         notifyDataSetChanged()
@@ -27,9 +30,9 @@ class EventListPgAdapter (var events: ArrayList<Items>): RecyclerView.Adapter<Ev
 
     override fun onBindViewHolder(holder: eventListPgViewHolder, position: Int) {
         holder.itemView.setOnClickListener {
-            SingletonEventID.eventID = events[position].id
-            val action = goToEventDetailPage(events[position])
-            Navigation.findNavController(it).navigate(action)
+            SingletonEventID.eventID = events[position].cityId
+            //val action = goToEventDetailPage(events[position])
+            //Navigation.findNavController(it).navigate(action)
         }
         holder.bind(events[position])
     }
@@ -47,10 +50,10 @@ class EventListPgAdapter (var events: ArrayList<Items>): RecyclerView.Adapter<Ev
         private val eventFormat = view.findViewById<TextView>(R.id.eventFormat)
         private val eventCategory = view.findViewById<TextView>(R.id.eventCategory)
 
-        fun bind(myEvent: Items){
+        fun bind(myEvent: EventsRm){
             eventName.text = myEvent.name
-            eventCategory.text = myEvent.category.name
-            eventFormat.text = myEvent.format.name
+            eventCategory.text = myEvent.category
+            eventFormat.text = myEvent.format
         }
     }
 

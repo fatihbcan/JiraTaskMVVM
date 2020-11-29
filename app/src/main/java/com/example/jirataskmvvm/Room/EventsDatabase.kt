@@ -9,6 +9,7 @@ import androidx.room.RoomDatabase
 abstract class EventsDatabase : RoomDatabase(){
 
     abstract fun cityDao():CityDao
+    abstract fun eventDao():EventsDao
 
     companion object{
         @Volatile

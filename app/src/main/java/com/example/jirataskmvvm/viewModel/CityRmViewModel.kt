@@ -8,18 +8,26 @@ import androidx.lifecycle.viewModelScope
 import com.example.jirataskmvvm.Room.CityRm
 import com.example.jirataskmvvm.Room.CityRoomRepository
 import com.example.jirataskmvvm.Room.EventsDatabase
+import com.example.jirataskmvvm.Room.EventsRoomRepository
 import com.example.jirataskmvvm.domain.cityPageDomain.CityRepository
+import com.example.jirataskmvvm.domain.eventListDomain.EventListRepository
+import com.example.jirataskmvvm.utils.InternetConnectionCheck
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
+import java.lang.Exception
+import com.example.jirataskmvvm.utils.callCityApi
+import com.example.jirataskmvvm.utils.callEventApi
 
-class CityRmViewModel (application: Application):AndroidViewModel(application) {
+class   CityRmViewModel (application: Application):AndroidViewModel(application) {
 
     val allCities = MutableLiveData<List<CityRm>>()
-    val cityDao = EventsDatabase.getEventsDatabase(application).cityDao()
+    private val cityDao = EventsDatabase.getEventsDatabase(application).cityDao()
+    private val eventDao = EventsDatabase.getEventsDatabase(application).eventDao()
     private val cityRoomRepository: CityRoomRepository = CityRoomRepository(cityDao)
     private val cityRepository: CityRepository = CityRepository()
+    private val eventRepository: EventListRepository = EventListRepository()
+    private val eventRoomRepository: EventsRoomRepository = EventsRoomRepository(eventDao)
 
     init {
         viewModelScope.launch(Main) {
@@ -27,33 +35,15 @@ class CityRmViewModel (application: Application):AndroidViewModel(application) {
             allCities.value = cities
         }
         viewModelScope.launch(IO) {
-            callCityApi()
-        }
-    }
-
-    private suspend fun addCity(cityRm: CityRm) {
-        cityRoomRepository.addCity(cityRm)
-
-    }
-
-
-    private suspend fun callCityApi() {
-        Log.d("cityRmViewModel callCityApi", "CoroutineScope is working")
-        val response = cityRepository.getCities()
-        try {
-            if (response.isSuccessful) {
-                val length = response.body()!!.size - 1
-                for (i in 0..length) {
-                    val cityRm = CityRm(response.body()!![i].id, response.body()!![i].name)
-                    addCity(cityRm)
+           try {
+                if(InternetConnectionCheck(application)){
+                    callCityApi(cityRepository,cityRoomRepository,eventRepository,eventRoomRepository)
+                   // callEventApi(eventRepository,eventRoomRepository)
                 }
-            } else {
-                Log.e("Response error !! code ", response.code().toString())
+            }catch (e: Exception){
+                Log.e("internet connection check error ",e.toString())
             }
-        } catch (e: HttpException) {
-            Log.e("Http error City Api ", e.toString())
         }
     }
-
 
 }
