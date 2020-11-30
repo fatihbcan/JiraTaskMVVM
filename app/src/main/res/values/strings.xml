@@ -22,4 +22,5 @@
     <string name="event_end_date">"Bitiş Tarihi : "</string>
     <string name="event_address">"Adres : "</string>
     <string name="event_online">Online Etkinlik</string>
+    <string name="todo">TODO</string>
 </resources>
