@@ -12,12 +12,11 @@ import com.example.jirataskmvvm.Room.EventsRoomRepository
 import com.example.jirataskmvvm.domain.cityPageDomain.CityRepository
 import com.example.jirataskmvvm.domain.eventListDomain.EventListRepository
 import com.example.jirataskmvvm.utils.InternetConnectionCheck
+import com.example.jirataskmvvm.utils.callCityApi
+import com.example.jirataskmvvm.utils.callEventApi
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
-import java.lang.Exception
-import com.example.jirataskmvvm.utils.callCityApi
-import com.example.jirataskmvvm.utils.callEventApi
 
 class   CityRmViewModel (application: Application):AndroidViewModel(application) {
 
@@ -35,15 +34,32 @@ class   CityRmViewModel (application: Application):AndroidViewModel(application)
             allCities.value = cities
         }
         viewModelScope.launch(IO) {
-           try {
-                if(InternetConnectionCheck(application)){
-                    callCityApi(cityRepository,cityRoomRepository,eventRepository,eventRoomRepository)
-                   // callEventApi(eventRepository,eventRoomRepository)
+            try {
+                if (InternetConnectionCheck(application)) {
+                    callCityApi(cityRepository, cityRoomRepository)
                 }
-            }catch (e: Exception){
-                Log.e("internet connection check error ",e.toString())
+            } catch (e: Exception) {
+                Log.e("internet connection check error ", e.toString())
+            }
+        }
+        viewModelScope.launch(IO) {
+            try {
+                if (InternetConnectionCheck(application)) {
+                    callEventApi(eventRepository, eventRoomRepository)
+                }
+            } catch (e: Exception) {
+                Log.e("internet connection check error ", e.toString())
             }
         }
     }
 
+    suspend fun loadData() {
+        val cities = cityRoomRepository.readAllCities()
+        allCities.value = cities
+    }
+
+
 }
+
+
+

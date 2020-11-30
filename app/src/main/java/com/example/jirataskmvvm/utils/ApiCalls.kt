@@ -9,18 +9,16 @@ import com.example.jirataskmvvm.domain.cityPageDomain.CityRepository
 import com.example.jirataskmvvm.domain.eventListDomain.EventListRepository
 import retrofit2.HttpException
 
-suspend fun callCityApi(cityRepository: CityRepository, cityRoomRepository: CityRoomRepository,eventsRepository: EventListRepository,
-                        eventsRoomRepository: EventsRoomRepository) {
+suspend fun callCityApi(cityRepository: CityRepository, cityRoomRepository: CityRoomRepository) {
     Log.d("cityRmViewModel callCityApi", "CoroutineScope is working")
     val response = cityRepository.getCities()
     try {
         if (response.isSuccessful) {
             val length = response.body()!!.size - 1
+            SingletonCityLength.cityLength = length
             for (i in 0..length) {
                 val cityRm = CityRm(response.body()!![i].id, response.body()!![i].name)
                 cityRoomRepository.addCity(cityRm)
-                SingletonCityIDRoom.cityID = i
-                callEventApi(eventsRepository,eventsRoomRepository)
             }
         } else {
             Log.e("Response error !! code ", response.code().toString())

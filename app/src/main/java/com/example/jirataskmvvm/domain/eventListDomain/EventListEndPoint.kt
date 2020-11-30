@@ -15,6 +15,6 @@ interface EventListEndPoint {
     )
     @GET("events")
     suspend fun getEvents(
-        @Query("city_ids") city_id: Int
+        @Query("take") count: Int
     ): Response<Json4Kotlin_Base>
 }

@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [CityRm::class],version = 1,exportSchema = false)
+@Database(entities = [CityRm::class, EventsRm::class], version = 1, exportSchema = false)
 abstract class EventsDatabase : RoomDatabase(){
 
     abstract fun cityDao():CityDao

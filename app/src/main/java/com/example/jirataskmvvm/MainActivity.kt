@@ -14,12 +14,17 @@ class MainActivity : AppCompatActivity() {
         setupNavigation()
     }
 
-    override fun onBackPressed() {
-        val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
-        (fragment as? IOnBackPressed)?.onBackPressed()?.not()?.let {
-            super.onBackPressed()
-        }
-    }
+    /*  override fun onBackPressed() {
+          if (supportFragmentManager.backStackEntryCount == 1) {
+              finish();
+
+          } else {
+              supportFragmentManager.popBackStack();
+              Toast.makeText(this,"Back button clicked !!",Toast.LENGTH_LONG).show()
+          }
+
+
+      }*/
 
     fun setupNavigation() {
         val host: NavHostFragment = supportFragmentManager
@@ -30,8 +35,4 @@ class MainActivity : AppCompatActivity() {
         myNav.setupWithNavController(navController)
     }
 
-}
-
-interface IOnBackPressed {
-    fun onBackPressed(): Boolean
 }

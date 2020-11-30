@@ -11,7 +11,7 @@ interface EventsDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addEvent(eventsRm: EventsRm)
 
-    @Query("SELECT * FROM events_table WHERE cityId == :cityId or cityId == null ORDER BY eId ASC")
+    @Query("SELECT * FROM events_table WHERE cityId == :cityId or cityId == 99 ORDER BY eId ASC")
     suspend fun readAllEvents(cityId : Int): List<EventsRm>
 
     @Query("SELECT * FROM events_table WHERE eId == :eventId")

@@ -11,7 +11,7 @@
         android:id="@+id/headerImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="TODO"
+        android:contentDescription="@string/todo"
         android:src="@android:mipmap/sym_def_app_icon"
         app:layout_constraintBottom_toTopOf="@+id/divider3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,7 +24,8 @@
         android:layout_height="wrap_content"
         android:text="@string/header"
         android:textColor="@color/black"
-        android:textSize="26dp"
+        android:textSize="26sp"
+        android:gravity="center"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,6 +33,7 @@
 
     <TextView
         android:id="@+id/price"
+        android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/price"
@@ -90,6 +92,7 @@
         android:layout_height="wrap_content"
         android:autoLink="web"
         android:text="@string/ticketurl"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/endDate" />

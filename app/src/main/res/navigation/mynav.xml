@@ -30,11 +30,11 @@
         android:name="com.example.jirataskmvvm.view.eventDetailPage.EventDetailPage"
         android:label="fragment_event_detail_page"
         tools:layout="@layout/fragment_event_detail_page">
-        <argument
-            android:name="eventDetails"
-            app:argType="com.example.jirataskmvvm.model.apiClasses.Items" />
         <action
             android:id="@+id/goToEventListPageFromDetails"
             app:destination="@id/eventListPage" />
+        <argument
+            android:name="event"
+            app:argType="com.example.jirataskmvvm.Room.EventsRm" />
     </fragment>
 </navigation>

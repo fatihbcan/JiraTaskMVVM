@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.jirataskmvvm.R
+import com.example.jirataskmvvm.utils.backButtonHandler
 import com.example.jirataskmvvm.viewModel.EventListViewModel
 
 
@@ -17,6 +18,11 @@ class EventListPage : Fragment() {
     lateinit var eventListViewModel: EventListViewModel
     private val eventListAdapter = EventListPgAdapter(arrayListOf())
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val action = EventListPageDirections.goToCitySelectionPage()
+        backButtonHandler(this, requireActivity(), action)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +41,6 @@ class EventListPage : Fragment() {
         }
 
 
-
         observeViewModel()
 
         return view
@@ -48,7 +53,6 @@ class EventListPage : Fragment() {
             }
         })
     }
-
 
 
 }
