@@ -1,4 +1,4 @@
-package com.example.jirataskmvvm.Room
+package com.example.jirataskmvvm.Room.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

@@ -3,13 +3,11 @@ package com.example.jirataskmvvm.viewModel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.jirataskmvvm.Room.EventsDatabase
-import com.example.jirataskmvvm.Room.EventsRm
-import com.example.jirataskmvvm.Room.EventsRoomRepository
+import com.example.jirataskmvvm.Room.entity.EventsRm
+import com.example.jirataskmvvm.Room.repo.EventsRoomRepository
 import com.example.jirataskmvvm.utils.SingletonCityID
-import com.example.jirataskmvvm.utils.SingletonCityIDRoom
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

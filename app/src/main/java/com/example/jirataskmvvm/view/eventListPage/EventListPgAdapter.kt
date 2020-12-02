@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.jirataskmvvm.R
-import com.example.jirataskmvvm.Room.EventsRm
+import com.example.jirataskmvvm.Room.entity.EventsRm
 import com.example.jirataskmvvm.utils.SingletonEventID
 import com.example.jirataskmvvm.view.eventListPage.EventListPageDirections.Companion.goToEventDetailPage
 

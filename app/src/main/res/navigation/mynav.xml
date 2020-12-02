@@ -35,6 +35,6 @@
             app:destination="@id/eventListPage" />
         <argument
             android:name="event"
-            app:argType="com.example.jirataskmvvm.Room.EventsRm" />
+            app:argType="com.example.jirataskmvvm.Room.entity.EventsRm" />
     </fragment>
 </navigation>

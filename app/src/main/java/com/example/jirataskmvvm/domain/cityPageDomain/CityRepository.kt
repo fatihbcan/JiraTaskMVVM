@@ -5,7 +5,7 @@ import retrofit2.Response
 
 class CityRepository {
 
-    val client: CityEndPoint = CityService.webservice
+    private val client: CityEndPoint = CityService.webservice
 
     suspend fun getCities(): Response<List<City>> = client.getCities()
 

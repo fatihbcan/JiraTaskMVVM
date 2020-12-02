@@ -5,7 +5,7 @@ import retrofit2.Response
 
 class EventListRepository {
 
-    val eventListClient: EventListEndPoint = EventListApiService.eventWebService
+    private val eventListClient: EventListEndPoint = EventListApiService.eventWebService
     private val count = 300
 
     suspend fun getEvents(): Response<Json4Kotlin_Base> = eventListClient.getEvents(count)

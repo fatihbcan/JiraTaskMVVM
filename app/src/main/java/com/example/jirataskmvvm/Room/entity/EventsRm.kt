@@ -1,4 +1,4 @@
-package com.example.jirataskmvvm.Room
+package com.example.jirataskmvvm.Room.entity
 
 import android.os.Parcel
 import android.os.Parcelable

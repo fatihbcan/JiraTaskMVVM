@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.jirataskmvvm.R
-import com.example.jirataskmvvm.Room.CityRm
+import com.example.jirataskmvvm.Room.entity.CityRm
 import com.example.jirataskmvvm.utils.SingletonCityID
 
 class cityScPageAdapter(var myCities: ArrayList<CityRm>) :

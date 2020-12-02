@@ -1,10 +1,10 @@
 package com.example.jirataskmvvm.utils
 
 import android.util.Log
-import com.example.jirataskmvvm.Room.CityRm
-import com.example.jirataskmvvm.Room.CityRoomRepository
-import com.example.jirataskmvvm.Room.EventsRm
-import com.example.jirataskmvvm.Room.EventsRoomRepository
+import com.example.jirataskmvvm.Room.entity.CityRm
+import com.example.jirataskmvvm.Room.entity.EventsRm
+import com.example.jirataskmvvm.Room.repo.CityRoomRepository
+import com.example.jirataskmvvm.Room.repo.EventsRoomRepository
 import com.example.jirataskmvvm.domain.cityPageDomain.CityRepository
 import com.example.jirataskmvvm.domain.eventListDomain.EventListRepository
 import retrofit2.HttpException
