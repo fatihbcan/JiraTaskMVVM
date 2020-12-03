@@ -23,4 +23,5 @@
     <string name="event_address">"Adres : "</string>
     <string name="event_online">Online Etkinlik</string>
     <string name="todo">TODO</string>
+    <string name="please_select_a_city_to_see_their_current_events">Please select a city to see their current events</string>
 </resources>

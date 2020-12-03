@@ -1,16 +1,15 @@
 package com.example.jirataskmvvm.utils
 
 import android.util.Log
-import com.example.jirataskmvvm.Room.entity.CityRm
-import com.example.jirataskmvvm.Room.entity.EventsRm
-import com.example.jirataskmvvm.Room.repo.CityRoomRepository
-import com.example.jirataskmvvm.Room.repo.EventsRoomRepository
-import com.example.jirataskmvvm.domain.cityPageDomain.CityRepository
-import com.example.jirataskmvvm.domain.eventListDomain.EventListRepository
+import com.example.jirataskmvvm.network.citiesNetwork.CityRepository
+import com.example.jirataskmvvm.network.eventsNetwork.EventRepository
+import com.example.jirataskmvvm.room.dao.CityDao
+import com.example.jirataskmvvm.room.dao.EventsDao
+import com.example.jirataskmvvm.room.entity.CityRm
+import com.example.jirataskmvvm.room.entity.EventsRm
 import retrofit2.HttpException
 
-suspend fun callCityApi(cityRepository: CityRepository, cityRoomRepository: CityRoomRepository) {
-    Log.d("cityRmViewModel callCityApi", "CoroutineScope is working")
+suspend fun callCityApi(cityRepository: CityRepository, cityDao: CityDao) {
     val response = cityRepository.getCities()
     try {
         if (response.isSuccessful) {
@@ -18,21 +17,22 @@ suspend fun callCityApi(cityRepository: CityRepository, cityRoomRepository: City
             SingletonCityLength.cityLength = length
             for (i in 0..length) {
                 val cityRm = CityRm(response.body()!![i].id, response.body()!![i].name)
-                cityRoomRepository.addCity(cityRm)
+                cityDao.addCity(cityRm)
             }
         } else {
             Log.e("Response error !! code ", response.code().toString())
         }
     } catch (e: HttpException) {
         Log.e("Http error City Api ", e.toString())
+        e.stackTrace
     }
 }
 
+
 suspend fun callEventApi(
-    eventsRepository: EventListRepository,
-    eventsRoomRepository: EventsRoomRepository
+    eventsRepository: EventRepository,
+    eventsDao: EventsDao
 ) {
-    Log.d("cityRmViewModel callCityApi", "CoroutineScope is working")
     val response = eventsRepository.getEvents()
     try {
         if (response.isSuccessful) {
@@ -62,12 +62,13 @@ suspend fun callEventApi(
                     cityId,
                     cityName
                 )
-                eventsRoomRepository.addEvent(event)
+                eventsDao.addEvent(event)
             }
         } else {
             Log.e("Response error !! code ", response.code().toString())
         }
     } catch (e: HttpException) {
         Log.e("Http error City Api ", e.toString())
+        e.stackTrace
     }
 }
