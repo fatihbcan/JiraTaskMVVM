@@ -1,7 +1,6 @@
 package com.example.jirataskmvvm
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -20,7 +19,7 @@ class MainActivity : DaggerAppCompatActivity() {
 
 
 
-    fun setupNavigation() {
+    private fun setupNavigation() {
         val host: NavHostFragment = supportFragmentManager
             .findFragmentById(R.id.fragment_container) as NavHostFragment? ?: return
 

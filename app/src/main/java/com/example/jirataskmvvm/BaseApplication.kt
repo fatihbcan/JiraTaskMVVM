@@ -1,8 +1,6 @@
 package com.example.jirataskmvvm
 
-import android.app.Application
 import com.example.jirataskmvvm.di.DaggerAppComponent
-
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 

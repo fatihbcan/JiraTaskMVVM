@@ -3,14 +3,13 @@ package com.example.jirataskmvvm.di
 import android.app.Application
 import androidx.annotation.NonNull
 import androidx.room.Room
-import com.example.jirataskmvvm.Room.EventsDatabase
-import com.example.jirataskmvvm.Room.dao.CityDao
-import com.example.jirataskmvvm.Room.dao.EventsDao
-import com.example.jirataskmvvm.Room.repo.CityRoomRepository
-import com.example.jirataskmvvm.Room.repo.EventsRoomRepository
-import com.example.jirataskmvvm.domain.cityPageDomain.CityRepository
-import com.example.jirataskmvvm.domain.eventListDomain.EventListRepository
-import dagger.Binds
+import com.example.jirataskmvvm.network.citiesNetwork.CityRepository
+import com.example.jirataskmvvm.network.eventsNetwork.EventRepository
+import com.example.jirataskmvvm.room.EventsDatabase
+import com.example.jirataskmvvm.room.dao.CityDao
+import com.example.jirataskmvvm.room.dao.EventsDao
+import com.example.jirataskmvvm.room.repo.CityRoomRepository
+import com.example.jirataskmvvm.room.repo.EventsRoomRepository
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -57,14 +56,14 @@ class AppModule {
         cityDao: CityDao,
         eventsDao: EventsDao,
         cityRepository: CityRepository,
-        eventListRepository: EventListRepository,
+        eventRepository: EventRepository,
         application: Application
     ): CityRoomRepository {
         return CityRoomRepository(
             cityDao,
             eventsDao,
             cityRepository,
-            eventListRepository,
+            eventRepository,
             application
         )
     }
@@ -83,8 +82,8 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideEventsRepository(): EventListRepository {
-        return EventListRepository()
+    fun provideEventsRepository(): EventRepository {
+        return EventRepository()
     }
 
 

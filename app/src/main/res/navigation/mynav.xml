@@ -2,39 +2,39 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/citySelectionPage">
+    app:startDestination="@id/cityListFragment">
 
     <fragment
-        android:id="@+id/eventListPage"
-        android:name="com.example.jirataskmvvm.view.eventListPage.EventListPage"
+        android:id="@+id/eventListFragment"
+        android:name="com.example.jirataskmvvm.view.eventListFragment.EventListFragment"
         android:label="fragment_event_list_page"
         tools:layout="@layout/fragment_event_list_page">
         <action
-            android:id="@+id/goToEventDetailPage"
-            app:destination="@id/eventDetailPage" />
+            android:id="@+id/goToEventDetailFragment"
+            app:destination="@id/eventDetailFragment" />
         <action
-            android:id="@+id/goToCitySelectionPage"
-            app:destination="@id/citySelectionPage" />
+            android:id="@+id/goToCityListFragment"
+            app:destination="@id/cityListFragment" />
     </fragment>
     <fragment
-        android:id="@+id/citySelectionPage"
-        android:name="com.example.jirataskmvvm.view.citySelectPage.citySelectionPage"
+        android:id="@+id/cityListFragment"
+        android:name="com.example.jirataskmvvm.view.cityListFragment.CityListFragment"
         android:label="fragment_city_selection_page"
         tools:layout="@layout/fragment_city_selection_page" >
         <action
-            android:id="@+id/goToEventListPage"
-            app:destination="@id/eventListPage" />
+            android:id="@+id/goToEventListFragment"
+            app:destination="@id/eventListFragment" />
     </fragment>
     <fragment
-        android:id="@+id/eventDetailPage"
-        android:name="com.example.jirataskmvvm.view.eventDetailPage.EventDetailPage"
+        android:id="@+id/eventDetailFragment"
+        android:name="com.example.jirataskmvvm.view.eventDetailFragment.EventDetailFragment"
         android:label="fragment_event_detail_page"
         tools:layout="@layout/fragment_event_detail_page">
         <action
-            android:id="@+id/goToEventListPageFromDetails"
-            app:destination="@id/eventListPage" />
+            android:id="@+id/goToEventListFragmentFromDetails"
+            app:destination="@id/eventListFragment" />
         <argument
             android:name="event"
-            app:argType="com.example.jirataskmvvm.Room.entity.EventsRm" />
+            app:argType="com.example.jirataskmvvm.room.entity.EventsRm" />
     </fragment>
 </navigation>

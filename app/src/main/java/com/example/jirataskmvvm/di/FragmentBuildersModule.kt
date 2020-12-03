@@ -1,7 +1,7 @@
 package com.example.jirataskmvvm.di
 
-import com.example.jirataskmvvm.view.citySelectPage.citySelectionPage
-import com.example.jirataskmvvm.view.eventListPage.EventListPage
+import com.example.jirataskmvvm.view.cityListFragment.CityListFragment
+import com.example.jirataskmvvm.view.eventListFragment.EventListFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -10,8 +10,8 @@ import dagger.android.ContributesAndroidInjector
 abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
-    abstract fun contributeCitySelectionPage(): citySelectionPage?
+    abstract fun contributeCitySelectionPage(): CityListFragment?
     @ContributesAndroidInjector
-    abstract fun contributeEventListPage(): EventListPage?
+    abstract fun contributeEventListPage(): EventListFragment?
 
 }

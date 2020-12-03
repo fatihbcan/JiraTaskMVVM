@@ -1,10 +1,8 @@
 package com.example.jirataskmvvm.di
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.example.jirataskmvvm.viewModel.CityRmViewModel
 import com.example.jirataskmvvm.viewModel.EventListViewModel
-import com.example.jirataskmvvm.viewModel.ViewModelProviderFactory
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

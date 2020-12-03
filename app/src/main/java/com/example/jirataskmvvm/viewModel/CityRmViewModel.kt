@@ -3,8 +3,8 @@ package com.example.jirataskmvvm.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.jirataskmvvm.Room.entity.CityRm
-import com.example.jirataskmvvm.Room.repo.CityRoomRepository
+import com.example.jirataskmvvm.room.entity.CityRm
+import com.example.jirataskmvvm.room.repo.CityRoomRepository
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,8 +21,6 @@ class   CityRmViewModel @Inject constructor(
             citiesRoomRepository.loadEventsToDb()
         }
     }
-
-
 
 }
 

@@ -1,18 +1,15 @@
 package com.example.jirataskmvvm.utils
 
 import android.util.Log
-import com.example.jirataskmvvm.Room.dao.CityDao
-import com.example.jirataskmvvm.Room.dao.EventsDao
-import com.example.jirataskmvvm.Room.entity.CityRm
-import com.example.jirataskmvvm.Room.entity.EventsRm
-import com.example.jirataskmvvm.Room.repo.CityRoomRepository
-import com.example.jirataskmvvm.Room.repo.EventsRoomRepository
-import com.example.jirataskmvvm.domain.cityPageDomain.CityRepository
-import com.example.jirataskmvvm.domain.eventListDomain.EventListRepository
+import com.example.jirataskmvvm.network.citiesNetwork.CityRepository
+import com.example.jirataskmvvm.network.eventsNetwork.EventRepository
+import com.example.jirataskmvvm.room.dao.CityDao
+import com.example.jirataskmvvm.room.dao.EventsDao
+import com.example.jirataskmvvm.room.entity.CityRm
+import com.example.jirataskmvvm.room.entity.EventsRm
 import retrofit2.HttpException
 
 suspend fun callCityApi(cityRepository: CityRepository, cityDao: CityDao) {
-    Log.d("cityRmViewModel callCityApi", "CoroutineScope is working")
     val response = cityRepository.getCities()
     try {
         if (response.isSuccessful) {
@@ -27,14 +24,15 @@ suspend fun callCityApi(cityRepository: CityRepository, cityDao: CityDao) {
         }
     } catch (e: HttpException) {
         Log.e("Http error City Api ", e.toString())
+        e.stackTrace
     }
 }
 
+
 suspend fun callEventApi(
-    eventsRepository: EventListRepository,
+    eventsRepository: EventRepository,
     eventsDao: EventsDao
 ) {
-    Log.d("cityRmViewModel callCityApi", "CoroutineScope is working")
     val response = eventsRepository.getEvents()
     try {
         if (response.isSuccessful) {
@@ -71,5 +69,6 @@ suspend fun callEventApi(
         }
     } catch (e: HttpException) {
         Log.e("Http error City Api ", e.toString())
+        e.stackTrace
     }
 }
