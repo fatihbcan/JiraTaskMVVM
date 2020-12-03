@@ -15,7 +15,7 @@ abstract class EventsDatabase : RoomDatabase() {
     abstract fun cityDao(): CityDao
     abstract fun eventDao(): EventsDao
 
-    companion object {
+   /* companion object {
         @Volatile
         private var INSTANCE: EventsDatabase? = null
 
@@ -34,5 +34,5 @@ abstract class EventsDatabase : RoomDatabase() {
                 return instance
             }
         }
-    }
+    }*/
 }
