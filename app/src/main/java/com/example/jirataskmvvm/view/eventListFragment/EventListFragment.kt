@@ -28,10 +28,6 @@ class EventListFragment : DaggerFragment(), EventsRecyclerClickListener {
 
     private val eventListViewModel by viewModels<EventListViewModel> { viewModelFactory }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
