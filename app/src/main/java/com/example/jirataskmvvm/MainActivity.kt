@@ -17,8 +17,6 @@ class MainActivity : DaggerAppCompatActivity() {
     }
 
 
-
-
     private fun setupNavigation() {
         val host: NavHostFragment = supportFragmentManager
             .findFragmentById(R.id.fragment_container) as NavHostFragment? ?: return

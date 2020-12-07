@@ -1,50 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="75dp">
-    <RelativeLayout
+
+<layout>
+
+    <data>
+
+        <variable
+            name="event"
+            type="com.example.jirataskmvvm.room.entity.EventsRoom" />
+    </data>
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="5dp">
+        android:layout_height="75dp">
 
-        <TextView
-            android:id="@+id/eventFragEventName"
-            android:gravity="center"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:layout_marginTop="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="@string/CKSM" />
-
-        <TextView
-            android:id="@+id/eventFragEventFormat"
-            android:textSize="12sp"
-            android:textStyle="italic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/eventFragEventName"
-            android:text="@string/Egitim" />
-
-        <TextView
-            android:id="@+id/eventFragEventCategory"
-            android:textSize="12sp"
-            android:textStyle="italic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/eventFragEventFormat"
-            android:text="@string/sanat" />
-
-        <View
-            android:id="@+id/eventListFragDivider"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider" />
+            android:layout_height="match_parent"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/eventFragEventName"
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@{event.name}" />
+
+            <TextView
+                android:id="@+id/eventFragEventFormat"
+                android:textSize="12sp"
+                android:textStyle="italic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/eventFragEventName"
+                android:text="@{event.format}" />
+
+            <TextView
+                android:id="@+id/eventFragEventCategory"
+                android:textSize="12sp"
+                android:textStyle="italic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/eventFragEventFormat"
+                android:text="@{event.category}" />
+
+            <View
+                android:id="@+id/eventListFragDivider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
 
 
-    </RelativeLayout>
+        </RelativeLayout>
 
-</androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+
+</layout>

@@ -1,31 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="50dp">
+
+<layout>
+
+    <data>
+
+        <variable
+            name="cityRoom"
+            type="com.example.jirataskmvvm.room.entity.CityRoom" />
+
+        <variable
+            name="clickListener"
+            type="com.example.jirataskmvvm.utils.CityRecyclerViewClickListener" />
+    </data>
 
 
-    <RelativeLayout
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fadingEdge="horizontal|vertical"
-        android:padding="3dp">
+        android:onClick="@{() -> clickListener.onRecyclerViewItemClick(cityRoom)}"
+        android:layout_height="50dp">
 
-        <TextView
-            android:id="@+id/cityFragmentcityName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:text="@string/a_city"
-            android:padding="3dp"
-            android:layout_centerInParent="true" />
 
-        <View
-            android:id="@+id/cityFragmentDivider"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider" />
-    </RelativeLayout>
-</androidx.cardview.widget.CardView>
+            android:layout_height="match_parent"
+            android:fadingEdge="horizontal|vertical"
+            android:padding="3dp">
+
+            <TextView
+                android:id="@+id/cityFragmentcityName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:text="@{cityRoom.name}"
+                android:padding="3dp"
+                android:layout_centerInParent="true" />
+
+            <View
+                android:id="@+id/cityFragmentDivider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</layout>

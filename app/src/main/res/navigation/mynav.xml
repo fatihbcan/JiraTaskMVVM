@@ -9,18 +9,19 @@
         android:name="com.example.jirataskmvvm.view.eventListFragment.EventListFragment"
         android:label="fragment_event_list_page"
         tools:layout="@layout/fragment_event_list_page">
+
         <action
             android:id="@+id/goToEventDetailFragment"
             app:destination="@id/eventDetailFragment" />
-        <action
-            android:id="@+id/goToCityListFragment"
-            app:destination="@id/cityListFragment" />
+        <argument
+            android:name="cityID"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/cityListFragment"
         android:name="com.example.jirataskmvvm.view.cityListFragment.CityListFragment"
         android:label="fragment_city_selection_page"
-        tools:layout="@layout/fragment_city_selection_page" >
+        tools:layout="@layout/fragment_city_selection_page">
         <action
             android:id="@+id/goToEventListFragment"
             app:destination="@id/eventListFragment" />
@@ -30,11 +31,8 @@
         android:name="com.example.jirataskmvvm.view.eventDetailFragment.EventDetailFragment"
         android:label="fragment_event_detail_page"
         tools:layout="@layout/fragment_event_detail_page">
-        <action
-            android:id="@+id/goToEventListFragmentFromDetails"
-            app:destination="@id/eventListFragment" />
         <argument
             android:name="event"
-            app:argType="com.example.jirataskmvvm.room.entity.EventsRm" />
+            app:argType="com.example.jirataskmvvm.room.entity.EventsRoom" />
     </fragment>
 </navigation>

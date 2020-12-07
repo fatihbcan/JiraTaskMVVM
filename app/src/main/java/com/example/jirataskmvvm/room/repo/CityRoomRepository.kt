@@ -8,7 +8,7 @@ import com.example.jirataskmvvm.network.citiesNetwork.CityRepository
 import com.example.jirataskmvvm.network.eventsNetwork.EventRepository
 import com.example.jirataskmvvm.room.dao.CityDao
 import com.example.jirataskmvvm.room.dao.EventsDao
-import com.example.jirataskmvvm.room.entity.CityRm
+import com.example.jirataskmvvm.room.entity.CityRoom
 import com.example.jirataskmvvm.utils.callCityApi
 import com.example.jirataskmvvm.utils.callEventApi
 import com.example.jirataskmvvm.utils.internetConnectionCheck
@@ -22,13 +22,15 @@ class CityRoomRepository @Inject constructor(
     private val application: Application
 ) {
 
-    fun getCities(): LiveData<List<CityRm>> {
+    // gets all cities from room
+    fun getCities(): LiveData<List<CityRoom>> {
         return liveData {
             val data = cityDao.readAllCities()
             emitSource(data)
         }
     }
 
+    // adds cities to DB from api call
     suspend fun loadCitiesToDb() {
         try {
             if (internetConnectionCheck(application)) {
@@ -40,6 +42,7 @@ class CityRoomRepository @Inject constructor(
         }
     }
 
+    // adds events to DB from api call
     suspend fun loadEventsToDb() {
         try {
             if (internetConnectionCheck(application)) {

@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 
 
 @Entity(tableName = "events_table")
-data class EventsRm(
+data class EventsRoom(
 
     @PrimaryKey(autoGenerate = true)
     val eId: Int,
@@ -20,9 +20,11 @@ data class EventsRm(
     val format: String,
     val category: String,
     val cityId: Int,
-    val cityName: String
+    val address: String
 
 ) : Parcelable {
+
+
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString().toString(),
@@ -49,19 +51,19 @@ data class EventsRm(
         parcel.writeString(format)
         parcel.writeString(category)
         parcel.writeInt(cityId)
-        parcel.writeString(cityName)
+        parcel.writeString(address)
     }
 
     override fun describeContents(): Int {
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<EventsRm> {
-        override fun createFromParcel(parcel: Parcel): EventsRm {
-            return EventsRm(parcel)
+    companion object CREATOR : Parcelable.Creator<EventsRoom> {
+        override fun createFromParcel(parcel: Parcel): EventsRoom {
+            return EventsRoom(parcel)
         }
 
-        override fun newArray(size: Int): Array<EventsRm?> {
+        override fun newArray(size: Int): Array<EventsRoom?> {
             return arrayOfNulls(size)
         }
     }

@@ -6,6 +6,8 @@ import android.net.NetworkCapabilities
 import android.util.Log
 
 
+// Checks if there is a internet connection to renew room from api call
+
 fun internetConnectionCheck(context: Context): Boolean {
     val connectivityManager =
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

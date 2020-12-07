@@ -11,6 +11,7 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeCitySelectionPage(): CityListFragment?
+
     @ContributesAndroidInjector
     abstract fun contributeEventListPage(): EventListFragment?
 

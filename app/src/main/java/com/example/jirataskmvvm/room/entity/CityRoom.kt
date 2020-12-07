@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 
 @Entity(tableName = "city_table")
-data class CityRm(
+data class CityRoom(
 
     @PrimaryKey(autoGenerate = true)
     val cId: Int,

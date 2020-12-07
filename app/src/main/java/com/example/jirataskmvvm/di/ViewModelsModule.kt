@@ -1,7 +1,7 @@
 package com.example.jirataskmvvm.di
 
 import androidx.lifecycle.ViewModel
-import com.example.jirataskmvvm.viewModel.CityRmViewModel
+import com.example.jirataskmvvm.viewModel.CityListViewModel
 import com.example.jirataskmvvm.viewModel.EventListViewModel
 import dagger.Binds
 import dagger.Module
@@ -14,8 +14,8 @@ abstract class ViewModelsModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(CityRmViewModel::class)
-    abstract fun bindCityRmViewModel(viewModel: CityRmViewModel?): ViewModel?
+    @ViewModelKey(CityListViewModel::class)
+    abstract fun bindCityRmViewModel(viewModel: CityListViewModel?): ViewModel?
 
 
     @Binds

@@ -5,59 +5,59 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
+import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.jirataskmvvm.R
-import com.example.jirataskmvvm.utils.backButtonHandler
+import com.example.jirataskmvvm.room.entity.EventsRoom
+import com.example.jirataskmvvm.utils.EventsRecyclerClickListener
 import com.example.jirataskmvvm.viewModel.EventListViewModel
 import com.example.jirataskmvvm.viewModel.ViewModelProviderFactory
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.fragment_event_list_page.view.*
+import kotlinx.android.synthetic.main.fragment_event_list_page.*
 import javax.inject.Inject
 
 
-class EventListFragment : DaggerFragment() {
+class EventListFragment : DaggerFragment(), EventsRecyclerClickListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProviderFactory
 
+    private val args: EventListFragmentArgs by navArgs()
+
     private val eventListViewModel by viewModels<EventListViewModel> { viewModelFactory }
-    private val eventListAdapter = EventListAdapter(arrayListOf())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val action = EventListFragmentDirections.goToCityListFragment()
-        backButtonHandler(this, requireActivity(), action)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_event_list_page, container, false)
+        return inflater.inflate(R.layout.fragment_event_list_page, container, false)
 
-
-        val recyclerView = view.eventListRecycler
-        recyclerView.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = eventListAdapter
-        }
-
-
-        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observeViewModel()
+
+        //loads events for desired city
+        eventListViewModel.loadEvents(args.cityID)
+
+        eventListViewModel.liveEvents.observe(viewLifecycleOwner, { events ->
+            eventListRecycler.also {
+                it.layoutManager = LinearLayoutManager(requireContext())
+                it.adapter = EventListAdapter(events, this)
+            }
+        })
     }
 
-   private fun observeViewModel() {
-        eventListViewModel.liveEvents.observe(viewLifecycleOwner) { events ->
-            events.let {
-                eventListAdapter.updateEvents(it)
-            }
-        }
+    // navigates to clicked events' detail fragment
+    override fun onRecyclerViewItemClick(view: View, eventsRoom: EventsRoom) {
+        val action = EventListFragmentDirections.goToEventDetailFragment(eventsRoom)
+        Navigation.findNavController(view).navigate(action)
     }
 
 

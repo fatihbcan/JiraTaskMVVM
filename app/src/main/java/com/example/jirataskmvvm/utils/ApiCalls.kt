@@ -5,18 +5,20 @@ import com.example.jirataskmvvm.network.citiesNetwork.CityRepository
 import com.example.jirataskmvvm.network.eventsNetwork.EventRepository
 import com.example.jirataskmvvm.room.dao.CityDao
 import com.example.jirataskmvvm.room.dao.EventsDao
-import com.example.jirataskmvvm.room.entity.CityRm
-import com.example.jirataskmvvm.room.entity.EventsRm
+import com.example.jirataskmvvm.room.entity.CityRoom
+import com.example.jirataskmvvm.room.entity.EventsRoom
 import retrofit2.HttpException
+
+
+//calls city list from api
 
 suspend fun callCityApi(cityRepository: CityRepository, cityDao: CityDao) {
     val response = cityRepository.getCities()
     try {
         if (response.isSuccessful) {
             val length = response.body()!!.size - 1
-            SingletonCityLength.cityLength = length
             for (i in 0..length) {
-                val cityRm = CityRm(response.body()!![i].id, response.body()!![i].name)
+                val cityRm = CityRoom(response.body()!![i].id, response.body()!![i].name)
                 cityDao.addCity(cityRm)
             }
         } else {
@@ -29,6 +31,8 @@ suspend fun callCityApi(cityRepository: CityRepository, cityDao: CityDao) {
 }
 
 
+//calls event list and details from api
+
 suspend fun callEventApi(
     eventsRepository: EventRepository,
     eventsDao: EventsDao
@@ -38,29 +42,29 @@ suspend fun callEventApi(
         if (response.isSuccessful) {
             val length = response.body()!!.items.size
             for (j in 0..length) {
-                val cityId : Int = if (response.body()!!.items[j].venue==null){
+                val cityId: Int = if (response.body()!!.items[j].venue == null) {
                     99
-                }else{
+                } else {
                     response.body()!!.items[j].venue.city.id
                 }
-                val cityName : String = if(response.body()!!.items[j].venue==null){
-                    ""
-                }else{
-                    response.body()!!.items[j].venue.city.name
+                val address: String = if (response.body()!!.items[j].venue == null) {
+                    "Online Etkinlik"
+                } else {
+                    response.body()!!.items[j].venue.address
                 }
 
-                val event = EventsRm(
+                val event = EventsRoom(
                     response.body()!!.items[j].id,
                     response.body()!!.items[j].name,
-                    response.body()!!.items[j].start,
-                    response.body()!!.items[j].end,
+                    getDate(response.body()!!.items[j].start),
+                    getDate(response.body()!!.items[j].end),
                     response.body()!!.items[j].is_free,
                     response.body()!!.items[j].poster_url,
                     response.body()!!.items[j].ticket_url,
                     response.body()!!.items[j].format.name,
                     response.body()!!.items[j].category.name,
                     cityId,
-                    cityName
+                    address
                 )
                 eventsDao.addEvent(event)
             }

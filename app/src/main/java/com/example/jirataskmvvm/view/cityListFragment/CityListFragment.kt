@@ -5,64 +5,53 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.jirataskmvvm.R
-import com.example.jirataskmvvm.viewModel.CityRmViewModel
+import com.example.jirataskmvvm.room.entity.CityRoom
+import com.example.jirataskmvvm.utils.CityRecyclerViewClickListener
+import com.example.jirataskmvvm.viewModel.CityListViewModel
 import com.example.jirataskmvvm.viewModel.ViewModelProviderFactory
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.fragment_city_selection_page.view.*
+import kotlinx.android.synthetic.main.fragment_city_selection_page.*
 import javax.inject.Inject
 
 
-class CityListFragment : DaggerFragment() {
+class CityListFragment : DaggerFragment(), CityRecyclerViewClickListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProviderFactory
 
-    private val cityViewModel by viewModels<CityRmViewModel> { viewModelFactory }
-    private val cityAdapter = CityListAdapter(arrayListOf())
+    private val cityViewModel by viewModels<CityListViewModel> { viewModelFactory }
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        val view = inflater.inflate(R.layout.fragment_city_selection_page, container, false)
-        cityViewModel.loadData()
-
-        val recyclerView = view.cityFragmentRecycler
-        recyclerView.apply {
-            layoutManager = LinearLayoutManager(activity)
-            adapter = cityAdapter
-        }
-
-
-
-        return view
+        return inflater.inflate(R.layout.fragment_city_selection_page, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observeViewModel()
+
+        //loads room database on IO thread
+        cityViewModel.loadData()
+
+        cityViewModel.allCities.observe(viewLifecycleOwner, { cities ->
+            cityFragmentRecycler.also {
+                it.layoutManager = LinearLayoutManager(requireContext())
+                it.adapter = CityListAdapter(cities, this)
+            }
+        })
     }
 
 
-     private fun observeViewModel() {
-        if (cityViewModel.allCities.value.isNullOrEmpty()) {
-            cityViewModel.allCities.observe(viewLifecycleOwner) { cities ->
-                cities.let {
-                    cityAdapter.updateCities(it)
-                }
-            }
-        } else {
-            cityViewModel.allCities.observe(viewLifecycleOwner) { cities ->
-                cities.let {
-                    cityAdapter.updateCities(it)
-                }
-            }
-        }
+    // navigates to event list fragment for clicked city
+    override fun onRecyclerViewItemClick(cityRoom: CityRoom) {
+        val action = CityListFragmentDirections.goToEventListFragment(cityRoom.cId)
+        findNavController().navigate(action)
 
     }
 }
